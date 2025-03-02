@@ -1,10 +1,8 @@
 import React from "react";
 import Link from "next/link"
 import { ArrowRight, Brain, Compass, Heart, MessageSquare, Wind } from "lucide-react"
-
 import { Button } from "../components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card"
-
 const fetchGeminiData = async (prompt) => {
   const response = await fetch('/api/gemini', {
     method: 'POST',
