@@ -1,9 +1,25 @@
+import React from "react";
 import Link from "next/link"
 import { ArrowRight, Brain, Compass, Heart, MessageSquare, Wind } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "../components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card"
 
+const fetchGeminiData = async (prompt) => {
+  const response = await fetch('/api/gemini', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt }),
+  });
+  const data = await response.json();
+  return data.text || 'Sorry, something went wrong.';
+};
+<Button onClick={async () => {
+  const result = await fetchGeminiData('Tell me a calming thought');
+  alert(result);
+}}>
+  Ask Gemini
+</Button>
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">

@@ -1,12 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import React, { useState } from "react"
 import { CalendarIcon, Plus, Trash } from "lucide-react"
 import { format } from "date-fns"
 
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "../../components/ui/button"
+import { Calendar } from "../../components/ui/calendar"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/ui/card"
 import {
   Dialog,
   DialogContent,
@@ -15,11 +15,25 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Textarea } from "@/components/ui/textarea"
+} from "../../components/ui/dialog"
+import { Input } from "../../components/ui/input"
+import { Label } from "../../components/ui/label"
+import { Popover, PopoverContent, PopoverTrigger } from "../../components/ui/popover"
+import { Textarea } from "../../components/ui/textarea"
+import { GoogleGenerativeAI } from '@google/generative-ai';
+
+const genAI = new GoogleGenerativeAI('YOUR_API_KEY');
+const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+
+const fetchGeminiData = async (prompt) => {
+  try {
+    const result = await model.generateContent(prompt);
+    return result.response.text();
+  } catch (error) {
+    console.error('Error fetching data from Gemini API:', error);
+    return 'Sorry, I could not process your request at this time.';
+  }
+};
 
 export default function JournalPage() {
   const [date, setDate] = useState(new Date())
@@ -96,7 +110,7 @@ export default function JournalPage() {
               <CardDescription>Record what you're grateful for</CardDescription>
             </CardHeader>
             <CardContent>
-              <Calendar mode="single" selected={date} onSelect={setDate} className="rounded-md border" />
+              <Calendar mode="single" selected={date} onSelect={(day) => day && setDate(day)} className="rounded-md border" />
             </CardContent>
             <CardFooter>
               <Dialog open={openDialog} onOpenChange={setOpenDialog}>
@@ -126,7 +140,7 @@ export default function JournalPage() {
                           </Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-auto p-0">
-                          <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
+                          <Calendar mode="single" selected={date} onSelect={(day) => day && setDate(day)} initialFocus />
                         </PopoverContent>
                       </Popover>
                     </div>
@@ -233,7 +247,7 @@ export default function JournalPage() {
                           </Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-auto p-0">
-                          <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
+                          <Calendar mode="single" selected={date} onSelect={(day) => day && setDate(day)} initialFocus />
                         </PopoverContent>
                       </Popover>
                     </div>
