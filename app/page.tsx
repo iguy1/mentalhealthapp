@@ -185,9 +185,7 @@ export default function Home() {
       </main>
       <footer className="w-full border-t py-6">
         <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
-          <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-            © 2025 Mindful. All rights reserved.
-          </p>
+        
           <div className="flex gap-4">
             <Link
               href="/about"

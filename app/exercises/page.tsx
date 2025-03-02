@@ -50,20 +50,7 @@ export default function ExercisesPage() {
               <CardDescription>Ground yourself in the present moment</CardDescription>
             </div>
           </CardHeader>
-          <CardContent className="flex-1">
-            <p className="text-muted-foreground">
-              Mindfulness practices help you focus on the present, breaking the cycle of rumination and overthinking.
-            </p>
-          </CardContent>
-          <CardFooter>
-            <Link href="/exercises/mindfulness" className="w-full">
-              <Button className="w-full">
-                Start Exercise
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-          </CardFooter>
-        </Card>
+          
         <Card className="flex flex-col">
           <CardHeader className="flex flex-row items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">

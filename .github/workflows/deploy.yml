@@ -24,15 +24,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Build and export the Next.js app
-      - name: Build and export Next.js app
-        run: |
-          npm run build   # Build the project
-          npm run export  # Export static files to the 'out' directory
+      # Step 4: Build the Next.js app
+      - name: Build Next.js app
+        run: npm run build  # Builds the project (this will use the 'output: export' setting)
 
       # Step 5: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out  # This is the correct input, changed from 'deploy_dir' to 'publish_dir'
+          publish_dir: ./out  # This is the folder where Next.js generates the static files
